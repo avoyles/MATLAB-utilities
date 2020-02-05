@@ -1,0 +1,5 @@
+for i=1:2*length(x_e)
+    z(i)=x_e(i);
+    z(2*i)=y_e(i);
+    i=i+1;
+end

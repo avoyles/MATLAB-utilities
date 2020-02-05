@@ -1,0 +1,13 @@
+box off;
+font_name = 'Helevtica';
+font_size = 12;
+set(gcf,'Color','w');
+set(gca,'FontSize',font_size); set(gca,'FontName',font_name);
+set(gca,'FontWeight','Bold');
+set(gca,'LineWidth',3);
+h = get(gca,'title'); set(h,'FontSize',font_size);
+set(h,'FontName',font_name); set(h,'FontWeight','Bold');
+h = get(gca,'xlabel'); set(h,'FontSize',font_size);
+set(h,'FontName',font_name); set(h,'FontWeight','Bold');
+h = get(gca,'ylabel'); set(h,'FontSize',font_size);
+set(h,'FontName',font_name); set(h,'FontWeight','Bold');
