@@ -53,6 +53,10 @@ classdef GammaCounts
         UncertaintyNumberofDecays
         NumberofDecays
         TimeSinceEoB
+        PercentUncertaintyActivity
+        PercentUncertaintyEfficiency
+        PercentUncertaintyNumberofCounts
+        PercentUncertaintyIGamma
     end
     
     properties (SetAccess = private)
@@ -163,7 +167,7 @@ classdef GammaCounts
             
             % Set machine tolerance for numerical derivatives
             % This is a relative scaling parameter!
-            epsilon = 1E-2;
+            epsilon = 1E-8;
             
             % Get nominal values of parameters for activity
             lambda = obj.Lambda;
@@ -217,6 +221,22 @@ classdef GammaCounts
         function value = get.TimeSinceEoB(obj)
           value = (obj.CountStartTime - juliandate(datetime(obj.EoBTime)) ) .* 24;
         end
+        function value = get.PercentUncertaintyActivity(obj)
+            value = strcat(num2str(100.*obj.UncertaintyActivity ./ obj.Activity),' %');
+        end
+        function value = get.PercentUncertaintyEfficiency(obj)
+            value = strcat(num2str(100.*obj.UncertaintyEfficiency ./ obj.Efficiency),' %');
+        end    
+        function value = get.PercentUncertaintyNumberofCounts(obj)
+            value = strcat(num2str(100.*obj.UncertaintyNumberOfCounts ./ obj.NumberOfCounts),' %');
+        end    
+        function value = get.PercentUncertaintyIGamma(obj)
+            value = strcat(num2str(100.*obj.UncertaintyIGamma ./ obj.IGamma),' %');
+        end    
+            
+        
+        
+        
         %     end
         %
         %     methods(Access = private)
