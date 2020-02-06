@@ -25,7 +25,7 @@ classdef GammaCounts
         EfficiencyCovarianceData
         %         Activity, in Bq
         Activity
-        Mass
+        Mass = NaN;
         CountStartTime = 0;
         EoBTime
         PCov
@@ -62,7 +62,11 @@ classdef GammaCounts
     methods
         function obj = GammaCounts( E_gamma, t_half, number_of_counts, unc_number_of_counts, I_gamma, unc_I_gamma, live_time, mu, rhodr, file_name, mass, count_start_time, eob_time, unc_rhodr, covariance_data)
             %Construct an instance of this class
-            if nargin > 0
+            if nargin == 2
+                % Make 2D oject array
+                obj(E_gamma, t_half) = obj;
+            elseif nargin > 2
+                % Construct objects
                 obj.FileName = file_name;
                 obj.EGamma = E_gamma;
                 obj.HalfLife = t_half;

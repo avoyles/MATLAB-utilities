@@ -7,8 +7,9 @@ function data_mat  = fitzpeaks_parser(filename_list, key_energies, gamma_lines, 
 attenuation_model = pchip(attenuation_data(:,1).*1e3,attenuation_data(:,2));
 
 % Set up cell array to hold results
-data_mat = cell([length(key_energies)  1+length(filename_list)]);
-data_mat(:,1) = num2cell(key_energies);
+data_mat = GammaCounts(length(key_energies),  length(filename_list));
+% data_mat = cell([length(key_energies)  1+length(filename_list)]);
+% data_mat(:,1) = num2cell(key_energies);
 
 % Set up arrays to hold shelf and detector info
 shelves = zeros(1,length(filename_list));
@@ -174,7 +175,8 @@ for i=1:length(filename_list)
         % obj = GammaCounts( E_gamma, t_half, number_of_counts, unc_number_of_counts, I_gamma, unc_I_gamma, live_time, mu, rhodr, file_name, mass, EoB_Time, unc_rhodr, covariance_data)
         temp_object = GammaCounts( sto_mat(gamma_index,1), sto_mat(gamma_index,7), sto_mat(gamma_index,2), sto_mat(gamma_index,3), sto_mat(gamma_index,8), sto_mat(gamma_index,9), sto_mat(gamma_index,6), mu(gamma_index), rhodrs(foil_id), fname, sto_mat(gamma_index,4), sto_mat(gamma_index,5), EoB_Time, unc_rhodrs(foil_id), effcal);
         % Merge matrix into data_mat
-        data_mat(ind(2,gamma_index),i+1) = {temp_object};
+        data_mat(ind(2,gamma_index),i) = temp_object;
+%         data_mat(ind(2,gamma_index),i+1) = {temp_object};
     end
     
     
