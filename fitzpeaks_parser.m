@@ -33,6 +33,10 @@ for i=1:length(filename_list)
     % Parse column data to cell structure
     %   'whichline' refers to the number of header lines in the report file
     parsed_fitzpeaks_data = textscan(fid,'%f %f %f %f %f %d %f %f %f %d','headerlines',whichline);
+    [number_of_parsed_gammas , ~] = size(parsed_fitzpeaks_data{1,1});
+    if number_of_parsed_gammas==0
+        fprintf('WARNING: no gammas found in report %s\n',fname)
+    end
     fclose(fid);
     
     % Get shelf position, for efficiency correction

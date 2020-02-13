@@ -114,6 +114,7 @@ classdef GammaCounts
                 
             else
                 fprintf('Warning: object not initialized!\n\n')
+%                 fprintf('%f',nargin)
             end
         end
         
