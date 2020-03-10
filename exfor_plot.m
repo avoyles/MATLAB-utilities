@@ -24,9 +24,14 @@ if n ~= 4
     error('Matrix is of wrong dimension. \n Matrix has %i columns of data, and 4 are expected.', n)
 end
 
-
-h=errorbar(matrix(:,1),1e3.*matrix(:,3),1e3.*matrix(:,4),1e3.*matrix(:,4),matrix(:,2),matrix(:,2),varargin{:});
-
+% Check for zero uncertainties
+if all(matrix(:,4) ==0)
+    % All uncertainties are equal to zero
+    h=plot(matrix(:,1),1e3.*matrix(:,3),varargin{:});
+else
+    % Actual uncertainties reported
+    h=errorbar(matrix(:,1),1e3.*matrix(:,3),1e3.*matrix(:,4),1e3.*matrix(:,4),matrix(:,2),matrix(:,2),varargin{:});
+end
 
 end
 
