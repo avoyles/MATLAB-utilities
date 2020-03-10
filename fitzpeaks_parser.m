@@ -110,7 +110,7 @@ for i=1:length(filename_list)
     
     
     % Number of columns for temporary storage matrix
-    num_cols = 9;
+    num_cols = 10;
     
     % Get list of gamma energies from the current report
     extract_energies = parsed_fitzpeaks_data{1,1};
@@ -168,7 +168,10 @@ for i=1:length(filename_list)
     % Replace with key energies
     sto_mat(:,1) = key_energies(ind(2,:));
     % append the t12 and Igamma data from a key
-    sto_mat(:,7:9) = gamma_lines(ind(2,:),:);
+%     glines = [t12  unc_t12  IGamma  unc_Igamma]
+% was           7               8         9
+% now           7      8        9         10 
+    sto_mat(:,7:10) = gamma_lines(ind(2,:),:);
     
     
     
@@ -176,8 +179,8 @@ for i=1:length(filename_list)
     mu = ppval(attenuation_model,sto_mat(:,1));
     for gamma_index = 1:length(sto_mat(:,1))
         %  Construct as:
-        % obj = GammaCounts( E_gamma, t_half, number_of_counts, unc_number_of_counts, I_gamma, unc_I_gamma, live_time, mu, rhodr, file_name, mass, EoB_Time, unc_rhodr, covariance_data)
-        temp_object = GammaCounts( sto_mat(gamma_index,1), sto_mat(gamma_index,7), sto_mat(gamma_index,2), sto_mat(gamma_index,3), sto_mat(gamma_index,8), sto_mat(gamma_index,9), sto_mat(gamma_index,6), mu(gamma_index), rhodrs(foil_id), fname, sto_mat(gamma_index,4), sto_mat(gamma_index,5), EoB_Time, unc_rhodrs(foil_id), effcal);
+        % obj = GammaCounts( E_gamma, t_half, unc_t_half, number_of_counts, unc_number_of_counts, I_gamma, unc_I_gamma, live_time, mu, rhodr, file_name, mass, EoB_Time, unc_rhodr, covariance_data)
+        temp_object = GammaCounts( sto_mat(gamma_index,1), sto_mat(gamma_index,7), sto_mat(gamma_index,8), sto_mat(gamma_index,2), sto_mat(gamma_index,3), sto_mat(gamma_index,9), sto_mat(gamma_index,10), sto_mat(gamma_index,6), mu(gamma_index), rhodrs(foil_id), fname, sto_mat(gamma_index,4), sto_mat(gamma_index,5), EoB_Time, unc_rhodrs(foil_id), effcal);
         % Merge matrix into data_mat
         data_mat(ind(2,gamma_index),i) = temp_object;
 %         data_mat(ind(2,gamma_index),i+1) = {temp_object};

@@ -64,7 +64,7 @@ classdef GammaCounts
     end
     
     methods
-        function obj = GammaCounts( E_gamma, t_half, number_of_counts, unc_number_of_counts, I_gamma, unc_I_gamma, live_time, mu, rhodr, file_name, mass, count_start_time, eob_time, unc_rhodr, covariance_data)
+        function obj = GammaCounts( E_gamma, t_half, unc_t_half, number_of_counts, unc_number_of_counts, I_gamma, unc_I_gamma, live_time, mu, rhodr, file_name, mass, count_start_time, eob_time, unc_rhodr, covariance_data)
             %Construct an instance of this class
             if nargin == 2
                 % Make 2D oject array
@@ -93,7 +93,8 @@ classdef GammaCounts
                 obj.UncertaintyMu = 0.05 .*mu;
                 
                 % Assume very tiny (0.1%) uncertainty in lifetime
-                obj.UncertaintyHalfLife = obj.HalfLife .* 0.001;
+%                 obj.UncertaintyHalfLife = obj.HalfLife .* 0.001;
+                obj.UncertaintyHalfLife = unc_t_half;
                 obj.UncertaintyLambda = obj.Lambda .* (obj.UncertaintyHalfLife ./ obj.HalfLife);
                 
                 % Assume 2s uncertainty in live time
